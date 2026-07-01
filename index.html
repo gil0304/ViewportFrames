@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ViewportFrames.css</title>
+    <meta name="description" content="スクリーンショットや動画を端末フレームに入れて美しく見せるCSSライブラリ。">
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="viewport-frames.css">
+    <link rel="stylesheet" href="demo.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="nav" aria-label="Main navigation">
+        <a class="brand" href="index.html">ViewportFrames.css</a>
+        <div class="nav-links">
+          <a href="#before-after">Before / After</a>
+          <a href="#frames">Frames</a>
+          <a href="#usage">Usage</a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div>
+          <p class="eyebrow">Screenshot Presentation Library</p>
+          <h1>ViewportFrames<wbr>.css</h1>
+          <p class="subtitle">スクリーンショットを、ただの画像ではなく、作品として見せる。</p>
+          <p class="lede">
+            iPhone、iPad、MacBook、ブラウザ、浮遊スクリーン風のフレームをCSSだけで追加できます。
+            ポートフォリオやLP、作品紹介ページで、画面の見せ方を一段引き上げます。
+          </p>
+          <div class="actions">
+            <a class="btn primary" href="viewport-frames.css" download>Download CSS</a>
+            <a class="btn" href="#frames">View Demo</a>
+            <a class="btn" href="https://github.com/gil0304/ViewportFrames" target="_blank" rel="noreferrer">GitHub</a>
+          </div>
+        </div>
+
+        <div class="hero-stage" aria-label="ViewportFrames demo showcase">
+          <div class="vf-showcase vf-overlap">
+            <div class="vf-macbook vf-silver vf-tilt-left">
+              <img src="assets/screenshots/macbook-demo.png" alt="MacBook上のWebサービス画面">
+            </div>
+            <div class="vf-iphone vf-dark vf-float">
+              <img src="assets/screenshots/iphone-demo.png" alt="iPhoneアプリのデモ画面">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section alt" id="before-after">
+        <div class="section-inner">
+          <div class="section-head center">
+            <p class="eyebrow">Before / After</p>
+            <h2>スクショの印象を一瞬で変える</h2>
+            <p>左は素の画像、右は同じ画像をiPhoneフレームに入れた例です。</p>
+          </div>
+          <div class="ba-wrap">
+            <div class="vf-before-after">
+              <div class="vf-before">
+                <p>Before</p>
+                <img src="assets/screenshots/iphone-demo.png" alt="普通のスクリーンショット">
+              </div>
+              <div class="vf-after">
+                <p>After</p>
+                <div class="vf-iphone vf-dark">
+                  <img src="assets/screenshots/iphone-demo.png" alt="iPhoneフレーム入りのスクリーンショット">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="frames">
+        <div class="section-inner">
+          <div class="demo-row">
+            <div class="copy">
+              <p class="eyebrow">iPhone</p>
+              <h2>アプリ画面を端末らしく</h2>
+              <p>
+                <code>.vf-iphone</code> はDynamic Island風パーツ、深い影、画面クリップを備えた縦長フレームです。
+                <code>.vf-landscape</code> や <code>.vf-notch</code> にも対応します。
+              </p>
+            </div>
+            <div class="vf-iphone vf-dark vf-float">
+              <img src="assets/screenshots/iphone-demo.png" alt="iPhoneアプリのデモ画面">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section alt">
+        <div class="section-inner">
+          <div class="demo-row reverse">
+            <div class="copy">
+              <p class="eyebrow">iPad</p>
+              <h2>横長UIや資料もきれいに</h2>
+              <p>
+                <code>.vf-ipad</code> はダッシュボード、ペイントアプリ、資料画面などを見せやすい横向きベースのフレームです。
+              </p>
+            </div>
+            <div class="vf-ipad vf-13 vf-landscape vf-silver">
+              <img src="assets/screenshots/ipad-demo.png" alt="iPadアプリのデモ画面">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-inner">
+          <div class="demo-row">
+            <div class="copy">
+              <p class="eyebrow">Browser Window</p>
+              <h2>Webサービスをブラウザ風に</h2>
+              <p>
+                <code>data-title</code> と <code>data-url</code> を指定すると、CSSの疑似要素でタブ名とURLバーを表示します。
+              </p>
+            </div>
+            <div class="vf-browser" data-title="Portfolio" data-url="https://example.com">
+              <img src="assets/screenshots/browser-demo.png" alt="Webサービスのデモ画面">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section alt">
+        <div class="section-inner">
+          <div class="demo-row reverse">
+            <div class="copy">
+              <p class="eyebrow">MacBook</p>
+              <h2>管理画面やLPをプロダクトらしく</h2>
+              <p>
+                <code>.vf-macbook</code> は画面、黒いベゼル、下部の土台をCSSだけで表現します。
+              </p>
+            </div>
+            <div class="vf-macbook vf-tilt-left">
+              <img src="assets/screenshots/macbook-demo.png" alt="MacBook上のWebサービス画面">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section dark">
+        <div class="section-inner">
+          <div class="demo-row">
+            <div class="copy">
+              <p class="eyebrow">Floating Screen</p>
+              <h2>作品サイト向けの浮遊スクリーン</h2>
+              <p>
+                <code>.vf-floating</code> に <code>.vf-glow</code> と <code>.vf-float</code> を足すと、画面だけが浮いているような見せ方になります。
+              </p>
+            </div>
+            <div class="vf-floating vf-glow vf-float" style="--vf-glow: 0 0 54px rgba(45, 212, 191, 0.42);">
+              <img src="assets/screenshots/browser-demo.png" alt="浮遊するスクリーン">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section alt">
+        <div class="section-inner">
+          <div class="section-head center">
+            <p class="eyebrow">Showcase</p>
+            <h2>複数端末を組み合わせる</h2>
+            <p>アプリとWeb管理画面のように、複数の画面をひとつの見せ場として配置できます。</p>
+          </div>
+          <div class="vf-showcase vf-overlap vf-responsive">
+            <div class="vf-browser vf-large" data-title="Admin" data-url="https://example.com/dashboard">
+              <img src="assets/screenshots/web-demo.png" alt="Web画面">
+            </div>
+            <div class="vf-iphone vf-dark vf-tilt-right">
+              <img src="assets/screenshots/app-demo.png" alt="アプリ画面">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-inner">
+          <div class="demo-row">
+            <div class="copy">
+              <p class="eyebrow">Scroll</p>
+              <h2>フレーム内だけスクロール</h2>
+              <p>
+                <code>.vf-scroll</code> と <code>.vf-screen-content</code> を使うと、端末フレームを固定したまま中身だけスクロールできます。
+              </p>
+            </div>
+            <div class="vf-iphone vf-light vf-scroll scroll-phone">
+              <div class="vf-screen-content">
+                <div class="mock-card"><strong>Today</strong><span></span></div>
+                <div class="mock-card"><strong>Tasks</strong><span></span></div>
+                <div class="mock-card"><strong>Notes</strong><span></span></div>
+                <div class="mock-card"><strong>Messages</strong><span></span></div>
+                <div class="mock-card"><strong>Reports</strong><span></span></div>
+                <div class="mock-card"><strong>Settings</strong><span></span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section dark" id="usage">
+        <div class="section-inner">
+          <div class="section-head">
+            <p class="eyebrow">Usage</p>
+            <h2>短いHTMLで使える</h2>
+            <p>画像、動画、iframe、任意のHTMLコンテンツをフレーム内に配置できます。</p>
+          </div>
+          <div class="code-grid">
+            <div class="code-panel">
+              <h3>Installation</h3>
+              <pre><code>&lt;link rel="stylesheet" href="viewport-frames.css"&gt;</code></pre>
+            </div>
+            <div class="code-panel">
+              <h3>Image</h3>
+              <pre><code>&lt;div class="vf-iphone"&gt;
+  &lt;img src="screenshot.png" alt="アプリ画面"&gt;
+&lt;/div&gt;</code></pre>
+            </div>
+            <div class="code-panel">
+              <h3>Video</h3>
+              <pre><code>&lt;div class="vf-browser" data-title="Video Demo" data-url="https://example.com/demo"&gt;
+  &lt;video src="demo.mp4" autoplay muted loop playsinline&gt;&lt;/video&gt;
+&lt;/div&gt;</code></pre>
+            </div>
+          </div>
+          <div style="margin-top: 36px;">
+            <div class="vf-browser vf-compact vf-dark" data-title="Video Demo" data-url="assets/videos/demo.mp4">
+              <video src="assets/videos/demo.mp4" autoplay muted loop playsinline></video>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section alt">
+        <div class="section-inner">
+          <div class="section-head">
+            <p class="eyebrow">Customize</p>
+            <h2>クラスとCSS変数</h2>
+            <p>色、影、角丸、サイズ、傾き、アニメーション速度をCSS変数で調整できます。</p>
+          </div>
+          <div class="class-grid">
+            <div class="class-panel">
+              <h3>Frames</h3>
+              <ul>
+                <li><code>.vf-iphone</code><span>iPhone</span></li>
+                <li><code>.vf-ipad</code><span>iPad</span></li>
+                <li><code>.vf-macbook</code><span>MacBook</span></li>
+                <li><code>.vf-browser</code><span>Browser</span></li>
+                <li><code>.vf-floating</code><span>Floating</span></li>
+              </ul>
+            </div>
+            <div class="class-panel">
+              <h3>Effects</h3>
+              <ul>
+                <li><code>.vf-float</code><span>Float</span></li>
+                <li><code>.vf-glow</code><span>Glow</span></li>
+                <li><code>.vf-tilt-left</code><span>Tilt</span></li>
+                <li><code>.vf-scroll</code><span>Scroll</span></li>
+                <li><code>.vf-no-shadow</code><span>No shadow</span></li>
+              </ul>
+            </div>
+            <div class="class-panel">
+              <h3>Colors</h3>
+              <ul>
+                <li><code>.vf-black</code><span>Black</span></li>
+                <li><code>.vf-natural</code><span>Natural</span></li>
+                <li><code>.vf-silver</code><span>Silver</span></li>
+                <li><code>.vf-blue</code><span>Blue</span></li>
+                <li><code>.vf-orange</code><span>Orange</span></li>
+              </ul>
+            </div>
+          </div>
+          <div style="margin-top: 24px;">
+            <pre><code>&lt;div class="vf-iphone vf-natural" style="--vf-width: 300px;"&gt;
+  &lt;img src="screenshot.png" alt="アプリ画面"&gt;
+&lt;/div&gt;</code></pre>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        <strong>ViewportFrames.css</strong>
+        <span>MIT License / Author: ViewportFrames.css contributors / <a href="https://github.com/" target="_blank" rel="noreferrer">GitHub</a></span>
+      </div>
+    </footer>
+  </body>
+</html>

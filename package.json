@@ -1,0 +1,47 @@
+{
+  "name": "@gil0304/viewport-frames",
+  "version": "0.1.0",
+  "description": "A lightweight CSS library for displaying screenshots, videos, iframes, and HTML content inside device and browser frames.",
+  "license": "MIT",
+  "author": "gil0304",
+  "homepage": "https://github.com/gil0304/ViewportFrames#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gil0304/ViewportFrames.git"
+  },
+  "bugs": {
+    "url": "https://github.com/gil0304/ViewportFrames/issues"
+  },
+  "keywords": [
+    "css",
+    "device-frame",
+    "browser-frame",
+    "screenshot",
+    "iphone",
+    "ipad",
+    "macbook"
+  ],
+  "style": "./viewport-frames.css",
+  "unpkg": "./viewport-frames.css",
+  "jsdelivr": "./viewport-frames.css",
+  "exports": {
+    ".": {
+      "style": "./viewport-frames.css",
+      "default": "./viewport-frames.css"
+    },
+    "./viewport-frames.css": "./viewport-frames.css",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "viewport-frames.css",
+    "scripts/check-css.js",
+    "README.md",
+    "LICENSE"
+  ],
+  "sideEffects": [
+    "*.css"
+  ],
+  "scripts": {
+    "check": "node scripts/check-css.js"
+  }
+}

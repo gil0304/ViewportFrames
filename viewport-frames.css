@@ -1,0 +1,1807 @@
+/*!
+ * ViewportFrames.css
+ * Screenshot Presentation Library
+ * MIT License
+ */
+
+:root {
+  --vf-frame-color: #111;
+  --vf-frame-secondary-color: #222;
+  --vf-screen-bg: #000;
+  --vf-screen-radius: 32px;
+  --vf-frame-radius: 44px;
+  --vf-border-width: 10px;
+  --vf-shadow: 0 24px 60px rgba(0, 0, 0, 0.25);
+  --vf-glow: 0 0 40px rgba(120, 160, 255, 0.35);
+  --vf-width: 320px;
+  --vf-aspect-ratio: 9 / 19.5;
+  --vf-duration: 4s;
+  --vf-tilt: 6deg;
+  --vf-scale: 1;
+  --vf-float-distance: 12px;
+}
+
+:is(.vf-iphone, .vf-ipad, .vf-macbook, .vf-browser, .vf-floating) {
+  --vf-offset-x: 0px;
+  --vf-offset-y: 0px;
+  --vf-rotate-x: 0deg;
+  --vf-rotate-y: 0deg;
+  --vf-rotate-z: 0deg;
+
+  box-sizing: border-box;
+  position: relative;
+  width: min(100%, var(--vf-width));
+  max-width: 100%;
+  margin-inline: auto;
+  transform:
+    translate(var(--vf-offset-x), var(--vf-offset-y))
+    rotateX(var(--vf-rotate-x))
+    rotateY(var(--vf-rotate-y))
+    rotateZ(var(--vf-rotate-z))
+    scale(var(--vf-scale));
+  transform-origin: center;
+  transform-style: preserve-3d;
+}
+
+:is(.vf-iphone, .vf-ipad, .vf-macbook, .vf-browser, .vf-floating),
+:is(.vf-iphone, .vf-ipad, .vf-macbook, .vf-browser, .vf-floating) *,
+:is(.vf-iphone, .vf-ipad, .vf-macbook, .vf-browser, .vf-floating)::before,
+:is(.vf-iphone, .vf-ipad, .vf-macbook, .vf-browser, .vf-floating)::after {
+  box-sizing: border-box;
+}
+
+:is(.vf-iphone, .vf-ipad, .vf-macbook, .vf-browser, .vf-floating)::before,
+:is(.vf-iphone, .vf-ipad, .vf-macbook, .vf-browser, .vf-floating)::after {
+  pointer-events: none;
+}
+
+:is(.vf-iphone, .vf-ipad, .vf-macbook, .vf-browser, .vf-floating) > :not(style):not(script) {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  border: 0;
+  background: var(--vf-screen-bg);
+  overflow: hidden;
+}
+
+:is(.vf-iphone, .vf-ipad, .vf-macbook, .vf-browser, .vf-floating) > :where(img, video, iframe, svg, canvas, picture) {
+  object-fit: cover;
+  object-position: center;
+}
+
+:is(.vf-iphone, .vf-ipad, .vf-macbook, .vf-browser, .vf-floating) > iframe {
+  border: 0;
+}
+
+:is(.vf-iphone, .vf-ipad, .vf-macbook, .vf-browser, .vf-floating) > picture > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.vf-dark {
+  --vf-frame-color: #0d0f16;
+  --vf-frame-secondary-color: #202637;
+  --vf-screen-bg: #05070b;
+}
+
+.vf-light {
+  --vf-frame-color: #f8fafc;
+  --vf-frame-secondary-color: #d9e1ea;
+  --vf-screen-bg: #fff;
+}
+
+.vf-silver {
+  --vf-frame-color: #d6dae1;
+  --vf-frame-secondary-color: #f4f6f8;
+  --vf-screen-bg: #f8fafc;
+}
+
+.vf-rounded {
+  --vf-frame-radius: 52px;
+  --vf-screen-radius: 38px;
+}
+
+.vf-iphone {
+  --vf-width: 320px;
+  --vf-aspect-ratio: 9 / 19.5;
+  --vf-border-width: 9px;
+  --vf-frame-radius: 36px;
+  --vf-screen-radius: 27px;
+
+  display: grid;
+  aspect-ratio: var(--vf-aspect-ratio);
+  padding: var(--vf-border-width);
+  border-radius: var(--vf-frame-radius);
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.28), transparent 9% 91%, rgba(255, 255, 255, 0.16)),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.2), transparent 18% 78%, rgba(0, 0, 0, 0.42)),
+    radial-gradient(circle at 50% 0, rgba(255, 255, 255, 0.18), transparent 38%),
+    linear-gradient(145deg, color-mix(in srgb, var(--vf-frame-secondary-color), #fff 8%), var(--vf-frame-color) 58%, #030405);
+  box-shadow:
+    var(--vf-shadow),
+    0 2px 3px rgba(255, 255, 255, 0.2) inset,
+    0 -2px 3px rgba(0, 0, 0, 0.42) inset,
+    inset 0 0 0 1px rgba(255, 255, 255, 0.18),
+    inset 0 0 0 2px rgba(0, 0, 0, 0.38);
+  overflow: hidden;
+}
+
+.vf-iphone > :not(style):not(script) {
+  border-radius: var(--vf-screen-radius);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.06),
+    inset 0 0 36px rgba(0, 0, 0, 0.28);
+}
+
+.vf-iphone::before {
+  content: "";
+  position: absolute;
+  z-index: 4;
+  top: max(11px, calc(var(--vf-border-width) + 4px));
+  left: 50%;
+  width: min(27%, 88px);
+  height: max(17px, 2.6%);
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 72% 44%, rgba(36, 42, 52, 0.92) 0 7%, transparent 8%),
+    linear-gradient(180deg, #15171d, #020304 72%);
+  box-shadow:
+    inset 0 1px 2px rgba(255, 255, 255, 0.13),
+    inset 0 -1px 2px rgba(0, 0, 0, 0.7),
+    0 1px 6px rgba(0, 0, 0, 0.34);
+  transform: translateX(-50%);
+}
+
+.vf-iphone::after {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  top: 22%;
+  right: 2px;
+  width: 2px;
+  height: 12%;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.28), rgba(0, 0, 0, 0.42));
+  box-shadow: 0 72px 0 rgba(255, 255, 255, 0.1);
+}
+
+.vf-iphone.vf-notch::before {
+  top: 0;
+  width: 42%;
+  height: max(26px, 5.5%);
+  border-radius: 0 0 20px 20px;
+}
+
+.vf-iphone.vf-landscape {
+  --vf-width: 620px;
+  --vf-aspect-ratio: 19.5 / 9;
+  --vf-frame-radius: 30px;
+  --vf-screen-radius: 21px;
+}
+
+.vf-iphone.vf-landscape::before {
+  top: 50%;
+  left: max(14px, calc(var(--vf-border-width) + 5px));
+  width: max(20px, 3%);
+  height: min(30%, 96px);
+  transform: translateY(-50%);
+}
+
+.vf-iphone.vf-landscape.vf-notch::before {
+  left: 0;
+  width: max(30px, 5.5%);
+  height: 42%;
+  border-radius: 0 18px 18px 0;
+}
+
+.vf-iphone.vf-landscape::after {
+  top: 3px;
+  right: 22%;
+  width: 12%;
+  height: 3px;
+  box-shadow: 72px 0 0 rgba(255, 255, 255, 0.12);
+}
+
+.vf-iphone.vf-portrait {
+  --vf-width: 320px;
+  --vf-aspect-ratio: 9 / 19.5;
+}
+
+.vf-ipad {
+  --vf-width: 620px;
+  --vf-aspect-ratio: 4 / 3;
+  --vf-border-width: 16px;
+  --vf-frame-radius: 28px;
+  --vf-screen-radius: 13px;
+
+  display: grid;
+  aspect-ratio: var(--vf-aspect-ratio);
+  padding: var(--vf-border-width);
+  border-radius: var(--vf-frame-radius);
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.34), transparent 12% 88%, rgba(0, 0, 0, 0.18)),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.26), transparent 24% 76%, rgba(0, 0, 0, 0.22)),
+    linear-gradient(145deg, color-mix(in srgb, var(--vf-frame-secondary-color), #fff 12%), var(--vf-frame-color));
+  box-shadow:
+    var(--vf-shadow),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.22),
+    inset 0 0 0 2px rgba(0, 0, 0, 0.18),
+    inset 0 -10px 24px rgba(0, 0, 0, 0.16);
+  overflow: hidden;
+}
+
+.vf-ipad > :not(style):not(script) {
+  border-radius: var(--vf-screen-radius);
+  box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.14);
+}
+
+.vf-ipad::before {
+  content: "";
+  position: absolute;
+  z-index: 4;
+  top: 8px;
+  left: 50%;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #090b10;
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.18);
+  transform: translateX(-50%);
+}
+
+.vf-ipad::after {
+  content: "";
+  position: absolute;
+  z-index: 3;
+  bottom: 7px;
+  left: 50%;
+  width: 68px;
+  height: 4px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.18);
+  transform: translateX(-50%);
+}
+
+.vf-ipad.vf-landscape {
+  --vf-width: 640px;
+  --vf-aspect-ratio: 4 / 3;
+}
+
+.vf-ipad.vf-portrait {
+  --vf-width: 420px;
+  --vf-aspect-ratio: 3 / 4;
+}
+
+.vf-ipad.vf-landscape::before {
+  top: 50%;
+  left: 8px;
+  transform: translateY(-50%);
+}
+
+.vf-ipad.vf-landscape::after {
+  top: 50%;
+  right: 7px;
+  bottom: auto;
+  left: auto;
+  width: 4px;
+  height: 68px;
+  transform: translateY(-50%);
+}
+
+.vf-macbook {
+  --vf-width: 760px;
+  --vf-aspect-ratio: 16 / 10.8;
+  --vf-border-width: 18px;
+  --vf-frame-radius: 19px;
+  --vf-screen-radius: 7px;
+
+  display: grid;
+  aspect-ratio: var(--vf-aspect-ratio);
+  padding: var(--vf-border-width) var(--vf-border-width) 34px;
+  border-radius: var(--vf-frame-radius) var(--vf-frame-radius) 12px 12px;
+  background:
+    radial-gradient(circle at 50% 9px, rgba(255, 255, 255, 0.22) 0 2px, transparent 3px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.2), transparent 6% 94%, rgba(255, 255, 255, 0.08)),
+    linear-gradient(180deg, #1b2029, #07090d 72%, #0a0c10);
+  box-shadow:
+    var(--vf-shadow),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.12),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.75);
+  overflow: visible;
+}
+
+.vf-macbook > :not(style):not(script) {
+  border-radius: var(--vf-screen-radius);
+  object-position: top center;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.04),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.28);
+}
+
+.vf-macbook::before {
+  content: "";
+  position: absolute;
+  z-index: 4;
+  top: 8px;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 35%, #3b4351, #020304 70%);
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.5),
+    inset 0 1px 1px rgba(255, 255, 255, 0.18);
+  transform: translateX(-50%);
+}
+
+.vf-macbook::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  right: -7%;
+  bottom: -9%;
+  left: -7%;
+  height: 11%;
+  border-radius: 0 0 28px 28px;
+  background:
+    radial-gradient(ellipse at 50% 0, rgba(85, 92, 104, 0.44) 0 5.5%, transparent 6%),
+    linear-gradient(90deg, #8b95a3, #edf1f5 13% 87%, #8d97a5),
+    linear-gradient(180deg, #f7f9fb 0%, #c4ccd6 46%, #909aa8 100%);
+  box-shadow:
+    0 21px 34px rgba(15, 23, 42, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.16);
+}
+
+.vf-browser {
+  --vf-width: 760px;
+  --vf-aspect-ratio: 16 / 11;
+  --vf-browser-bar: 62px;
+  --vf-browser-bar-bg: #edf1f5;
+  --vf-browser-url-bg: #fff;
+  --vf-browser-text: #475569;
+  --vf-frame-radius: 15px;
+  --vf-screen-radius: 0 0 13px 13px;
+
+  display: grid;
+  aspect-ratio: var(--vf-aspect-ratio);
+  padding-top: var(--vf-browser-bar);
+  border-radius: var(--vf-frame-radius);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.28), transparent 18%),
+    var(--vf-frame-color);
+  box-shadow:
+    var(--vf-shadow),
+    inset 0 0 0 1px rgba(15, 23, 42, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.65);
+  overflow: hidden;
+}
+
+.vf-browser > :not(style):not(script) {
+  border-radius: var(--vf-screen-radius);
+  object-position: top center;
+}
+
+.vf-browser::before {
+  content: attr(data-title);
+  position: absolute;
+  z-index: 3;
+  inset: 0 0 auto;
+  height: var(--vf-browser-bar);
+  padding: 12px 47% 0 100px;
+  overflow: hidden;
+  color: var(--vf-browser-text);
+  font: 600 12px/1.2 ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  background:
+    radial-gradient(circle at 22px 22px, #ff5f57 0 5.5px, #d9463d 5.6px 6.4px, transparent 6.5px),
+    radial-gradient(circle at 44px 22px, #ffbd2e 0 5.5px, #d89d1f 5.6px 6.4px, transparent 6.5px),
+    radial-gradient(circle at 66px 22px, #28c840 0 5.5px, #1ea334 5.6px 6.4px, transparent 6.5px),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.62), transparent 42%),
+    linear-gradient(180deg, var(--vf-browser-bar-bg), color-mix(in srgb, var(--vf-browser-bar-bg), #000 9%));
+  border-bottom: 1px solid rgba(15, 23, 42, 0.1);
+}
+
+.vf-browser::after {
+  content: attr(data-url);
+  position: absolute;
+  z-index: 4;
+  top: 16px;
+  right: 18px;
+  left: min(43%, 300px);
+  height: 30px;
+  padding: 0 15px;
+  overflow: hidden;
+  border-radius: 999px;
+  color: var(--vf-browser-text);
+  font: 500 12px/30px ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.86), rgba(255, 255, 255, 0.58)),
+    var(--vf-browser-url-bg);
+  box-shadow:
+    inset 0 0 0 1px rgba(15, 23, 42, 0.1),
+    0 1px 1px rgba(255, 255, 255, 0.55);
+}
+
+.vf-browser.vf-dark {
+  --vf-browser-bar-bg: #151a25;
+  --vf-browser-url-bg: #0b1020;
+  --vf-browser-text: #cbd5e1;
+}
+
+.vf-browser.vf-light,
+.vf-browser.vf-silver {
+  --vf-browser-bar-bg: #eef2f7;
+  --vf-browser-url-bg: #fff;
+  --vf-browser-text: #475569;
+}
+
+.vf-browser.vf-compact {
+  --vf-width: 560px;
+  --vf-browser-bar: 44px;
+}
+
+.vf-browser.vf-compact::before {
+  padding-top: 8px;
+}
+
+.vf-browser.vf-compact::after {
+  top: 9px;
+  height: 24px;
+  line-height: 24px;
+}
+
+.vf-browser.vf-large {
+  --vf-width: 960px;
+}
+
+.vf-floating {
+  --vf-width: 720px;
+  --vf-aspect-ratio: 16 / 9;
+  --vf-frame-radius: 28px;
+  --vf-screen-radius: 22px;
+
+  display: grid;
+  aspect-ratio: var(--vf-aspect-ratio);
+  padding: clamp(5px, 1.1vw, 10px);
+  border-radius: var(--vf-frame-radius);
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.56), rgba(255, 255, 255, 0.08)),
+    color-mix(in srgb, var(--vf-frame-color), transparent 78%);
+  box-shadow: var(--vf-shadow);
+  overflow: hidden;
+  backdrop-filter: blur(16px);
+}
+
+.vf-floating > :not(style):not(script) {
+  border-radius: var(--vf-screen-radius);
+}
+
+/* Real-device frames drawn with CSS only. Public physical/display specs define
+   the ratios; non-published radii and sensor positions are matched visually. */
+.vf-iphone {
+  --vf-width: 320px;
+  --vf-aspect-ratio: 719 / 1500;
+  --vf-screen-left: 3.72%;
+  --vf-screen-top: 1.77%;
+  --vf-screen-right: 3.72%;
+  --vf-screen-bottom: 1.77%;
+  --vf-screen-radius: 10.85% / 5.2%;
+  --vf-device-radius: 16.8% / 8.05%;
+  --vf-metal-edge: color-mix(in srgb, var(--vf-frame-color), #f9fafb 24%);
+  --vf-metal-mid: color-mix(in srgb, var(--vf-frame-color), #07080b 72%);
+  --vf-metal-dark: color-mix(in srgb, var(--vf-frame-color), #000 86%);
+  --vf-metal-glint: rgba(255, 255, 255, 0.7);
+  --vf-glass-glint: rgba(255, 255, 255, 0.2);
+  --vf-iphone-sensors:
+    radial-gradient(circle at 56.4% 5.72%, rgba(84, 104, 218, 0.86) 0 0.34%, #111827 0.72%, #020305 1.24%, transparent 1.38%),
+    radial-gradient(circle at 56.4% 5.72%, rgba(255, 255, 255, 0.3) 0 0.11%, transparent 0.21%),
+    radial-gradient(ellipse 17.2% 2.08% at 50% 5.72%, #020203 0 70%, #111114 72% 86%, transparent 88%),
+    radial-gradient(ellipse 15% 1.12% at 50% 5.22%, rgba(255, 255, 255, 0.12), transparent 72%);
+
+  display: block;
+  aspect-ratio: var(--vf-aspect-ratio);
+  padding: 0;
+  border-radius: var(--vf-device-radius);
+  background:
+    linear-gradient(90deg, transparent 0 0.56%, var(--vf-metal-glint) 0.82%, var(--vf-metal-edge) 1.18%, var(--vf-metal-mid) 2.62%, var(--vf-metal-dark) 4.1%, #000 50%, var(--vf-metal-dark) 95.9%, var(--vf-metal-edge) 98.82%, var(--vf-metal-glint) 99.18%, transparent 99.44%),
+    linear-gradient(180deg, transparent 0 0.44%, var(--vf-metal-glint) 0.75%, var(--vf-metal-edge) 1.16%, var(--vf-metal-mid) 2.18%, #020203 4.1%, #000 95.9%, var(--vf-metal-mid) 97.84%, var(--vf-metal-edge) 98.84%, var(--vf-metal-glint) 99.25%, transparent 99.56%),
+    radial-gradient(ellipse at 50% 0.62%, rgba(255, 255, 255, 0.48), transparent 34%),
+    radial-gradient(ellipse at 50% 99.35%, rgba(255, 255, 255, 0.24), transparent 34%),
+    #000;
+  box-shadow:
+    0 30px 68px rgba(15, 23, 42, 0.32),
+    0 2px 5px rgba(255, 255, 255, 0.34) inset,
+    0 -2px 6px rgba(255, 255, 255, 0.14) inset,
+    0 0 0 1px rgba(255, 255, 255, 0.36) inset,
+    0 0 0 4px rgba(0, 0, 0, 0.88) inset;
+  filter: none;
+  isolation: isolate;
+  overflow: visible;
+}
+
+.vf-iphone.vf-dark {
+  --vf-metal-edge: #4b4f57;
+  --vf-metal-mid: #14161b;
+  --vf-metal-dark: #000;
+  --vf-metal-glint: rgba(255, 255, 255, 0.5);
+}
+
+.vf-iphone.vf-light,
+.vf-iphone.vf-silver {
+  --vf-metal-edge: #fbfaf5;
+  --vf-metal-mid: #d4d6d2;
+  --vf-metal-dark: #6f7475;
+  --vf-metal-glint: rgba(255, 255, 255, 0.92);
+}
+
+.vf-iphone.vf-portrait {
+  --vf-aspect-ratio: 719 / 1500;
+}
+
+.vf-iphone > :not(style):not(script) {
+  position: absolute;
+  z-index: 1;
+  top: var(--vf-screen-top);
+  right: var(--vf-screen-right);
+  bottom: var(--vf-screen-bottom);
+  left: var(--vf-screen-left);
+  width: calc(100% - var(--vf-screen-left) - var(--vf-screen-right));
+  height: calc(100% - var(--vf-screen-top) - var(--vf-screen-bottom));
+  border-radius: var(--vf-screen-radius);
+  background: var(--vf-screen-bg);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.05),
+    0 0 0 2px rgba(0, 0, 0, 0.96) inset,
+    0 0 36px rgba(0, 0, 0, 0.36) inset;
+  overflow: hidden;
+}
+
+.vf-iphone > :where(img, video, iframe, svg, canvas, picture) {
+  object-position: top center;
+}
+
+.vf-iphone::before {
+  content: "";
+  position: absolute;
+  z-index: 3;
+  inset: 0;
+  width: auto;
+  height: auto;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: inherit;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.54), transparent 2.1% 97.9%, rgba(255, 255, 255, 0.46)),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.58), transparent 2.45% 97.55%, rgba(255, 255, 255, 0.36)),
+    radial-gradient(ellipse 84% 98% at 50% 50%, transparent 68%, rgba(255, 255, 255, 0.1) 77%, transparent 85%);
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.84) inset,
+    0 0 0 4px rgba(255, 255, 255, 0.055) inset,
+    8px 0 11px rgba(255, 255, 255, 0.22) inset,
+    -8px 0 11px rgba(255, 255, 255, 0.14) inset,
+    0 12px 14px rgba(255, 255, 255, 0.17) inset,
+    0 -12px 14px rgba(255, 255, 255, 0.1) inset;
+  transform: none;
+}
+
+.vf-iphone::after {
+  content: "";
+  position: absolute;
+  z-index: 4;
+  inset: 0;
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  background:
+    linear-gradient(180deg, var(--vf-metal-glint), var(--vf-metal-edge) 36%, var(--vf-metal-dark)) left 20.7% / 0.9% 6.8% no-repeat,
+    linear-gradient(180deg, var(--vf-metal-glint), var(--vf-metal-edge) 36%, var(--vf-metal-dark)) left 29.1% / 0.9% 7.6% no-repeat,
+    linear-gradient(180deg, var(--vf-metal-glint), var(--vf-metal-edge) 36%, var(--vf-metal-dark)) left 38.05% / 0.9% 7.6% no-repeat,
+    linear-gradient(180deg, var(--vf-metal-glint), var(--vf-metal-edge) 34%, var(--vf-metal-dark)) right 31.3% / 0.9% 12.4% no-repeat,
+    linear-gradient(180deg, rgba(255, 255, 255, 0.36), transparent 55%) 50% 1.06% / 55% 1.1% no-repeat,
+    var(--vf-iphone-sensors),
+    radial-gradient(ellipse 13% 1.55% at 50% 0.92%, var(--vf-glass-glint), transparent 72%),
+    radial-gradient(ellipse 10% 1.25% at 50% 99.08%, rgba(255, 255, 255, 0.15), transparent 72%);
+  box-shadow: none;
+  transform: none;
+}
+
+.vf-iphone.vf-notch {
+  --vf-iphone-sensors:
+    radial-gradient(ellipse 22.5% 5% at 50% 1.54%, #020203 0 72%, rgba(17, 17, 18, 0.96) 74% 84%, transparent 85%),
+    radial-gradient(circle at 58.5% 3.3%, rgba(66, 89, 196, 0.78) 0 0.34%, #060812 0.72%, transparent 0.86%);
+}
+
+.vf-iphone.vf-landscape {
+  --vf-aspect-ratio: 1500 / 719;
+  --vf-screen-left: 1.77%;
+  --vf-screen-top: 3.72%;
+  --vf-screen-right: 1.77%;
+  --vf-screen-bottom: 3.72%;
+  --vf-screen-radius: 5.2% / 10.85%;
+
+  display: block;
+  padding: 0;
+  border-radius: 8.05% / 16.8%;
+  overflow: visible;
+}
+
+.vf-iphone.vf-landscape::before {
+  inset: 0;
+  width: auto;
+  height: auto;
+  border-radius: inherit;
+  transform: none;
+}
+
+.vf-iphone.vf-landscape::after {
+  inset: 0;
+  width: auto;
+  height: auto;
+  background:
+    linear-gradient(90deg, var(--vf-metal-glint), var(--vf-metal-edge) 36%, var(--vf-metal-dark)) 20.7% top / 6.8% 0.9% no-repeat,
+    linear-gradient(90deg, var(--vf-metal-glint), var(--vf-metal-edge) 36%, var(--vf-metal-dark)) 29.1% top / 7.6% 0.9% no-repeat,
+    linear-gradient(90deg, var(--vf-metal-glint), var(--vf-metal-edge) 36%, var(--vf-metal-dark)) 38.05% top / 7.6% 0.9% no-repeat,
+    linear-gradient(90deg, var(--vf-metal-glint), var(--vf-metal-edge) 34%, var(--vf-metal-dark)) 31.3% bottom / 12.4% 0.9% no-repeat,
+    linear-gradient(90deg, rgba(255, 255, 255, 0.36), transparent 55%) 1.06% 50% / 1.1% 55% no-repeat,
+    radial-gradient(circle at 5.7% 39.7%, rgba(84, 104, 218, 0.86) 0 0.34%, #111827 0.72%, #020305 1.44%, transparent 1.56%),
+    radial-gradient(ellipse 1.82% 8.25% at 5.72% 54.6%, #020203 0 70%, #111114 72% 86%, transparent 88%),
+    radial-gradient(ellipse 1.55% 13% at 0.92% 50%, var(--vf-glass-glint), transparent 72%);
+  box-shadow: none;
+}
+
+.vf-iphone.vf-landscape.vf-notch::after {
+  background:
+    linear-gradient(90deg, var(--vf-metal-glint), var(--vf-metal-edge) 36%, var(--vf-metal-dark)) 20.7% top / 6.8% 0.9% no-repeat,
+    linear-gradient(90deg, var(--vf-metal-glint), var(--vf-metal-edge) 36%, var(--vf-metal-dark)) 29.1% top / 7.6% 0.9% no-repeat,
+    linear-gradient(90deg, var(--vf-metal-glint), var(--vf-metal-edge) 36%, var(--vf-metal-dark)) 38.05% top / 7.6% 0.9% no-repeat,
+    linear-gradient(90deg, var(--vf-metal-glint), var(--vf-metal-edge) 34%, var(--vf-metal-dark)) 31.3% bottom / 12.4% 0.9% no-repeat,
+    radial-gradient(ellipse 5% 22.5% at 1.54% 50%, #020203 0 72%, rgba(17, 17, 18, 0.96) 74% 84%, transparent 85%);
+}
+
+.vf-ipad {
+  --vf-width: 720px;
+  --vf-aspect-ratio: 2816 / 2155;
+  --vf-screen-left: 3.1%;
+  --vf-screen-top: 4.03%;
+  --vf-screen-right: 3.1%;
+  --vf-screen-bottom: 4.03%;
+  --vf-screen-radius: 4.65% / 6.05%;
+  --vf-device-radius: 5.45% / 7.12%;
+  --vf-ipad-metal-edge: color-mix(in srgb, var(--vf-frame-secondary-color), #fff 42%);
+  --vf-ipad-metal-mid: color-mix(in srgb, var(--vf-frame-color), #000 18%);
+  --vf-ipad-metal-dark: color-mix(in srgb, var(--vf-frame-color), #000 62%);
+  --vf-ipad-glint: rgba(255, 255, 255, 0.84);
+
+  display: block;
+  aspect-ratio: var(--vf-aspect-ratio);
+  padding: 0;
+  border-radius: var(--vf-device-radius);
+  background:
+    linear-gradient(90deg, transparent 0 0.34%, var(--vf-ipad-glint) 0.52%, var(--vf-ipad-metal-edge) 0.9%, var(--vf-ipad-metal-dark) 1.82%, #000 3.18%, #000 96.82%, var(--vf-ipad-metal-dark) 98.18%, var(--vf-ipad-metal-edge) 99.1%, var(--vf-ipad-glint) 99.48%, transparent 99.66%),
+    linear-gradient(180deg, transparent 0 0.4%, var(--vf-ipad-glint) 0.58%, var(--vf-ipad-metal-edge) 0.96%, var(--vf-ipad-metal-dark) 1.84%, #000 3.05%, #000 96.95%, var(--vf-ipad-metal-dark) 98.16%, var(--vf-ipad-metal-edge) 99.04%, var(--vf-ipad-glint) 99.42%, transparent 99.6%),
+    radial-gradient(ellipse at 50% 0.72%, rgba(255, 255, 255, 0.42), transparent 31%),
+    radial-gradient(ellipse at 50% 99.28%, rgba(255, 255, 255, 0.18), transparent 28%),
+    #000;
+  box-shadow:
+    0 32px 74px rgba(15, 23, 42, 0.24),
+    0 0 0 1px rgba(255, 255, 255, 0.34) inset,
+    0 0 0 4px rgba(0, 0, 0, 0.86) inset,
+    10px 0 16px rgba(255, 255, 255, 0.16) inset,
+    -10px 0 16px rgba(255, 255, 255, 0.11) inset;
+  filter: none;
+  isolation: isolate;
+  overflow: visible;
+}
+
+.vf-ipad.vf-dark {
+  --vf-ipad-metal-edge: #4b5057;
+  --vf-ipad-metal-mid: #171b22;
+  --vf-ipad-metal-dark: #020304;
+  --vf-ipad-glint: rgba(255, 255, 255, 0.46);
+}
+
+.vf-ipad.vf-light,
+.vf-ipad.vf-silver {
+  --vf-ipad-metal-edge: #f7f8f8;
+  --vf-ipad-metal-mid: #cfd4da;
+  --vf-ipad-metal-dark: #737982;
+  --vf-ipad-glint: rgba(255, 255, 255, 0.9);
+}
+
+.vf-ipad > :not(style):not(script) {
+  position: absolute;
+  z-index: 1;
+  top: var(--vf-screen-top);
+  right: var(--vf-screen-right);
+  bottom: var(--vf-screen-bottom);
+  left: var(--vf-screen-left);
+  width: calc(100% - var(--vf-screen-left) - var(--vf-screen-right));
+  height: calc(100% - var(--vf-screen-top) - var(--vf-screen-bottom));
+  border-radius: var(--vf-screen-radius);
+  background: var(--vf-screen-bg);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.05),
+    0 0 0 2px rgba(0, 0, 0, 0.94) inset,
+    0 0 30px rgba(0, 0, 0, 0.18) inset;
+  overflow: hidden;
+}
+
+.vf-ipad > :where(img, video, iframe, svg, canvas, picture) {
+  object-position: top center;
+}
+
+.vf-ipad::before {
+  content: "";
+  position: absolute;
+  z-index: 3;
+  inset: 0;
+  width: auto;
+  height: auto;
+  border: 1px solid rgba(255, 255, 255, 0.34);
+  border-radius: inherit;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.56), transparent 1.62% 98.38%, rgba(255, 255, 255, 0.44)),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.58), transparent 2.05% 97.95%, rgba(255, 255, 255, 0.38));
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.72) inset,
+    0 0 0 4px rgba(255, 255, 255, 0.05) inset,
+    0 9px 13px rgba(255, 255, 255, 0.13) inset,
+    0 -9px 13px rgba(255, 255, 255, 0.08) inset;
+  transform: none;
+}
+
+.vf-ipad::after {
+  content: "";
+  position: absolute;
+  z-index: 4;
+  inset: 0;
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  background:
+    linear-gradient(90deg, var(--vf-ipad-glint), var(--vf-ipad-metal-edge) 36%, var(--vf-ipad-metal-dark)) 6.4% top / 6.05% 0.56% no-repeat,
+    linear-gradient(90deg, var(--vf-ipad-glint), var(--vf-ipad-metal-edge) 36%, var(--vf-ipad-metal-dark)) 13.05% top / 4.5% 0.56% no-repeat,
+    linear-gradient(180deg, var(--vf-ipad-glint), var(--vf-ipad-metal-edge) 36%, var(--vf-ipad-metal-dark)) left 8.5% / 0.48% 6.25% no-repeat,
+    radial-gradient(circle at 47.1% 2.78%, rgba(76, 99, 211, 0.85) 0 0.19%, #050711 0.42%, transparent 0.55%),
+    radial-gradient(circle at 50% 2.78%, #020303 0 0.5%, transparent 0.58%),
+    radial-gradient(circle at 52.65% 2.78%, #020303 0 0.5%, transparent 0.58%),
+    radial-gradient(ellipse 1.25% 0.52% at 44.65% 2.8%, #020303 0 72%, transparent 74%),
+    radial-gradient(ellipse 22% 1.3% at 50% 0.72%, rgba(255, 255, 255, 0.17), transparent 72%),
+    radial-gradient(ellipse 18% 1.1% at 50% 99.18%, rgba(255, 255, 255, 0.12), transparent 72%);
+  box-shadow: none;
+  transform: none;
+}
+
+.vf-ipad.vf-portrait {
+  --vf-width: 420px;
+  --vf-aspect-ratio: 2155 / 2816;
+  --vf-screen-left: 4.03%;
+  --vf-screen-top: 3.1%;
+  --vf-screen-right: 4.03%;
+  --vf-screen-bottom: 3.1%;
+  --vf-screen-radius: 6.05% / 4.65%;
+  --vf-device-radius: 7.12% / 5.45%;
+}
+
+.vf-ipad.vf-landscape {
+  --vf-width: 720px;
+  --vf-aspect-ratio: 2816 / 2155;
+}
+
+.vf-ipad.vf-landscape:not(.vf-portrait) {
+  --vf-aspect-ratio: 2816 / 2155;
+
+  aspect-ratio: var(--vf-aspect-ratio);
+}
+
+.vf-ipad.vf-landscape::before,
+.vf-ipad.vf-landscape::after {
+  inset: 0;
+  width: auto;
+  height: auto;
+  transform: none;
+}
+
+.vf-ipad.vf-landscape::before {
+  border-radius: inherit;
+}
+
+.vf-ipad.vf-landscape::after {
+  border-radius: 0;
+}
+
+.vf-ipad.vf-portrait::after {
+  background:
+    linear-gradient(180deg, var(--vf-ipad-glint), var(--vf-ipad-metal-edge) 36%, var(--vf-ipad-metal-dark)) right 6.4% / 0.56% 6.05% no-repeat,
+    linear-gradient(180deg, var(--vf-ipad-glint), var(--vf-ipad-metal-edge) 36%, var(--vf-ipad-metal-dark)) right 13.05% / 0.56% 4.5% no-repeat,
+    linear-gradient(90deg, var(--vf-ipad-glint), var(--vf-ipad-metal-edge) 36%, var(--vf-ipad-metal-dark)) 8.5% top / 6.25% 0.48% no-repeat,
+    radial-gradient(circle at 97.22% 47.1%, rgba(76, 99, 211, 0.85) 0 0.19%, #050711 0.42%, transparent 0.55%),
+    radial-gradient(circle at 97.22% 50%, #020303 0 0.5%, transparent 0.58%),
+    radial-gradient(circle at 97.22% 52.65%, #020303 0 0.5%, transparent 0.58%),
+    radial-gradient(ellipse 0.52% 1.25% at 97.2% 44.65%, #020303 0 72%, transparent 74%),
+    radial-gradient(ellipse 1.3% 22% at 99.28% 50%, rgba(255, 255, 255, 0.17), transparent 72%);
+}
+
+.vf-macbook {
+  --vf-width: 760px;
+  --vf-aspect-ratio: 3041 / 2100;
+  --vf-screen-left: 2.38%;
+  --vf-screen-top: 5.18%;
+  --vf-screen-right: 2.38%;
+  --vf-screen-bottom: 5.15%;
+  --vf-screen-radius: 1.65% / 2.42%;
+  --vf-frame-radius: 3.25% / 4.7%;
+  --vf-mac-metal-light: color-mix(in srgb, var(--vf-frame-secondary-color), #fff 58%);
+  --vf-mac-metal-mid: color-mix(in srgb, var(--vf-frame-color), #b8c0ca 48%);
+  --vf-mac-metal-dark: color-mix(in srgb, var(--vf-frame-color), #000 36%);
+
+  display: block;
+  aspect-ratio: var(--vf-aspect-ratio);
+  padding: 0;
+  border-radius: var(--vf-frame-radius) var(--vf-frame-radius) 1.8% 1.8%;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.2), transparent 4.2% 95.8%, rgba(255, 255, 255, 0.12)),
+    linear-gradient(180deg, #1a1d24 0%, #090b0f 7.6%, #020304 91%, #11151c 100%);
+  box-shadow:
+    0 30px 70px rgba(15, 23, 42, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.32),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.13),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.72);
+  filter: none;
+  isolation: isolate;
+  overflow: visible;
+}
+
+.vf-macbook.vf-dark {
+  --vf-mac-metal-light: #3e4652;
+  --vf-mac-metal-mid: #1c222b;
+  --vf-mac-metal-dark: #05070a;
+}
+
+.vf-macbook.vf-light,
+.vf-macbook.vf-silver {
+  --vf-mac-metal-light: #f9fbfd;
+  --vf-mac-metal-mid: #cfd6df;
+  --vf-mac-metal-dark: #8d98a7;
+}
+
+.vf-macbook > :not(style):not(script) {
+  position: absolute;
+  z-index: 1;
+  top: var(--vf-screen-top);
+  right: var(--vf-screen-right);
+  bottom: var(--vf-screen-bottom);
+  left: var(--vf-screen-left);
+  width: calc(100% - var(--vf-screen-left) - var(--vf-screen-right));
+  height: calc(100% - var(--vf-screen-top) - var(--vf-screen-bottom));
+  border-radius: var(--vf-screen-radius);
+  background: var(--vf-screen-bg);
+  object-position: top center;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.05),
+    0 0 0 2px rgba(0, 0, 0, 0.72) inset;
+  overflow: hidden;
+}
+
+.vf-macbook::before {
+  content: "";
+  position: absolute;
+  z-index: 4;
+  top: var(--vf-screen-top);
+  left: 50%;
+  width: 10.9%;
+  height: 5.45%;
+  border-radius: 0 0 14px 14px;
+  background:
+    radial-gradient(circle at 50% 30%, rgba(54, 72, 116, 0.92) 0 5%, #040507 12%, transparent 14%),
+    linear-gradient(180deg, #010203, #050609);
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.1),
+    0 1px 0 rgba(255, 255, 255, 0.04);
+  transform: translateX(-50%);
+}
+
+.vf-macbook::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  right: -6.8%;
+  bottom: -8.9%;
+  left: -6.8%;
+  height: 10.9%;
+  border-radius: 0 0 28px 28px;
+  background:
+    radial-gradient(ellipse at 50% 0, rgba(82, 90, 102, 0.48) 0 5.4%, transparent 5.7%),
+    linear-gradient(90deg, transparent 0 0.7%, rgba(255, 255, 255, 0.72) 1.4%, transparent 2.2% 97.8%, rgba(255, 255, 255, 0.62) 98.6%, transparent 99.3%),
+    linear-gradient(180deg, var(--vf-mac-metal-light) 0%, var(--vf-mac-metal-mid) 46%, var(--vf-mac-metal-dark) 100%);
+  box-shadow:
+    0 22px 34px rgba(15, 23, 42, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.82),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.18);
+}
+
+/* Reference-matched frames. These rules intentionally come last in the device
+   section so older convenience variants cannot push parts outside the frame. */
+.vf-black,
+.vf-space-black,
+.vf-dark {
+  --vf-frame-color: #050607;
+  --vf-frame-secondary-color: #2b2d30;
+  --vf-metal-glint: rgba(255, 255, 255, 0.48);
+  --vf-metal-edge: #8d8f90;
+  --vf-metal-mid: #3b3d3e;
+  --vf-metal-dark: #050607;
+}
+
+.vf-natural {
+  --vf-frame-color: #bbb4aa;
+  --vf-frame-secondary-color: #eee9df;
+  --vf-metal-glint: rgba(255, 255, 255, 0.86);
+  --vf-metal-edge: #f6f0e6;
+  --vf-metal-mid: #b9b0a4;
+  --vf-metal-dark: #756e67;
+}
+
+.vf-white,
+.vf-silver,
+.vf-light {
+  --vf-frame-color: #d9dde1;
+  --vf-frame-secondary-color: #f8fafc;
+  --vf-metal-glint: rgba(255, 255, 255, 0.94);
+  --vf-metal-edge: #fbfcfd;
+  --vf-metal-mid: #c8cdd2;
+  --vf-metal-dark: #777f88;
+}
+
+.vf-blue {
+  --vf-frame-color: #233049;
+  --vf-frame-secondary-color: #44587b;
+  --vf-metal-glint: rgba(198, 213, 242, 0.72);
+  --vf-metal-edge: #6e82a7;
+  --vf-metal-mid: #293753;
+  --vf-metal-dark: #101725;
+}
+
+.vf-orange,
+.vf-cosmic-orange {
+  --vf-frame-color: #d9783d;
+  --vf-frame-secondary-color: #f3aa71;
+  --vf-metal-glint: rgba(255, 230, 204, 0.86);
+  --vf-metal-edge: #ffc491;
+  --vf-metal-mid: #d9783d;
+  --vf-metal-dark: #74391c;
+}
+
+.vf-space-gray,
+.vf-midnight {
+  --vf-frame-color: #2c3440;
+  --vf-frame-secondary-color: #68717d;
+  --vf-metal-glint: rgba(212, 220, 229, 0.64);
+  --vf-metal-edge: #77818d;
+  --vf-metal-mid: #303946;
+  --vf-metal-dark: #111821;
+}
+
+.vf-starlight,
+.vf-gold {
+  --vf-frame-color: #d8cdb8;
+  --vf-frame-secondary-color: #fbf4e6;
+  --vf-metal-glint: rgba(255, 250, 236, 0.9);
+  --vf-metal-edge: #fff2d7;
+  --vf-metal-mid: #d6c4a3;
+  --vf-metal-dark: #8d7955;
+}
+
+.vf-iphone {
+  --vf-width: 320px;
+  --vf-aspect-ratio: 450 / 920;
+  --vf-body-left: 0.89%;
+  --vf-body-top: 0.76%;
+  --vf-body-right: 0.89%;
+  --vf-body-bottom: 0.76%;
+  --vf-screen-left: 5.08%;
+  --vf-screen-top: 2.55%;
+  --vf-screen-right: 5.08%;
+  --vf-screen-bottom: 3.12%;
+  --vf-screen-radius: 11.72% / 5.72%;
+  --vf-device-radius: 14.7% / 7.2%;
+  --vf-glass-glint: rgba(255, 255, 255, 0.2);
+  --vf-island-x: 45%;
+  --vf-island-y: 5.98%;
+  --vf-camera-x: 59.85%;
+  --vf-camera-y: 6.03%;
+
+  display: block;
+  aspect-ratio: var(--vf-aspect-ratio);
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  filter: drop-shadow(0 24px 52px rgba(15, 23, 42, 0.28));
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.vf-iphone > :not(style):not(script) {
+  position: absolute;
+  z-index: 1;
+  top: var(--vf-screen-top);
+  right: var(--vf-screen-right);
+  bottom: var(--vf-screen-bottom);
+  left: var(--vf-screen-left);
+  width: calc(100% - var(--vf-screen-left) - var(--vf-screen-right));
+  height: calc(100% - var(--vf-screen-top) - var(--vf-screen-bottom));
+  border-radius: var(--vf-screen-radius);
+  background: var(--vf-screen-bg);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.04),
+    0 0 0 2px rgba(0, 0, 0, 0.98) inset,
+    0 0 38px rgba(0, 0, 0, 0.34) inset;
+  overflow: hidden;
+}
+
+.vf-iphone > :where(img, video, iframe, svg, canvas, picture) {
+  object-position: top center;
+}
+
+.vf-iphone::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset:
+    var(--vf-body-top)
+    var(--vf-body-right)
+    var(--vf-body-bottom)
+    var(--vf-body-left);
+  width: auto;
+  height: auto;
+  border: 0;
+  border-radius: var(--vf-device-radius);
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.65), transparent 1.2% 98.8%, rgba(255, 255, 255, 0.42)),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.72), transparent 1.2% 98.8%, rgba(255, 255, 255, 0.28)),
+    linear-gradient(90deg, transparent 0 0.9%, var(--vf-metal-glint) 1.08%, var(--vf-metal-edge) 1.9%, var(--vf-metal-mid) 3.2%, #060606 4.6%, #000 50%, #060606 95.4%, var(--vf-metal-mid) 96.8%, var(--vf-metal-edge) 98.1%, var(--vf-metal-glint) 98.92%, transparent 100%),
+    linear-gradient(180deg, transparent 0 0.7%, var(--vf-metal-glint) 1.02%, var(--vf-metal-edge) 1.72%, var(--vf-metal-mid) 3.05%, #050505 4.4%, #000 95.6%, var(--vf-metal-mid) 96.95%, var(--vf-metal-edge) 98.28%, var(--vf-metal-glint) 98.98%, transparent 99.3%),
+    radial-gradient(ellipse at 50% 0.58%, rgba(255, 255, 255, 0.48), transparent 31%),
+    radial-gradient(ellipse at 50% 99.4%, rgba(255, 255, 255, 0.24), transparent 30%),
+    #000;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.22) inset,
+    0 0 0 3px rgba(0, 0, 0, 0.84) inset,
+    7px 0 10px rgba(255, 255, 255, 0.2) inset,
+    -7px 0 10px rgba(255, 255, 255, 0.12) inset,
+    0 10px 12px rgba(255, 255, 255, 0.14) inset,
+    0 -10px 12px rgba(255, 255, 255, 0.1) inset;
+  transform: none;
+}
+
+.vf-iphone::after {
+  content: "";
+  position: absolute;
+  z-index: 4;
+  inset: 0;
+  width: auto;
+  height: auto;
+  border: 0;
+  border-radius: 0;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.76), var(--vf-metal-edge) 34%, var(--vf-metal-dark)) 0.72% 21.1% / 0.92% 4.65% no-repeat,
+    linear-gradient(180deg, rgba(255, 255, 255, 0.74), var(--vf-metal-edge) 34%, var(--vf-metal-dark)) 0.72% 28.9% / 0.92% 7.35% no-repeat,
+    linear-gradient(180deg, rgba(255, 255, 255, 0.74), var(--vf-metal-edge) 34%, var(--vf-metal-dark)) 0.72% 38.05% / 0.92% 7.35% no-repeat,
+    linear-gradient(180deg, rgba(255, 255, 255, 0.74), var(--vf-metal-edge) 34%, var(--vf-metal-dark)) 98.36% 31.3% / 0.92% 12.1% no-repeat,
+    linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.34), transparent) 30% 1.33% / 10% 0.26% no-repeat,
+    linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.28), transparent) 64% 1.33% / 13% 0.26% no-repeat,
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 124 36'%3E%3Crect x='0' y='1' width='78' height='34' rx='17' fill='%23080909'/%3E%3Crect x='6' y='6' width='66' height='22' rx='11' fill='%23010101'/%3E%3Cpath d='M12 7h48' stroke='%23fff' stroke-opacity='.055' stroke-width='2' stroke-linecap='round'/%3E%3Ccircle cx='106' cy='18' r='18' fill='%23060708'/%3E%3Ccircle cx='106' cy='18' r='12' fill='%23080a14'/%3E%3Ccircle cx='106' cy='18' r='6.2' fill='%23132363'/%3E%3Ccircle cx='109' cy='15.2' r='2.1' fill='%237b92ff' fill-opacity='.75'/%3E%3Ccircle cx='104.6' cy='19.5' r='2.6' fill='%23040916' fill-opacity='.75'/%3E%3C/svg%3E") 50% 4.28% / 27.6% 3.92% no-repeat,
+    radial-gradient(ellipse 13% 1.55% at 50% 0.92%, var(--vf-glass-glint), transparent 72%),
+    radial-gradient(ellipse 10% 1.25% at 50% 99.08%, rgba(255, 255, 255, 0.14), transparent 72%);
+  box-shadow: none;
+  transform: none;
+}
+
+.vf-iphone.vf-notch {
+  --vf-island-x: 50%;
+  --vf-camera-x: 58.5%;
+}
+
+.vf-iphone.vf-notch::after {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.76), var(--vf-metal-edge) 34%, var(--vf-metal-dark)) 0.72% 21.1% / 0.92% 4.65% no-repeat,
+    linear-gradient(180deg, rgba(255, 255, 255, 0.74), var(--vf-metal-edge) 34%, var(--vf-metal-dark)) 0.72% 28.9% / 0.92% 7.35% no-repeat,
+    linear-gradient(180deg, rgba(255, 255, 255, 0.74), var(--vf-metal-edge) 34%, var(--vf-metal-dark)) 0.72% 38.05% / 0.92% 7.35% no-repeat,
+    linear-gradient(180deg, rgba(255, 255, 255, 0.74), var(--vf-metal-edge) 34%, var(--vf-metal-dark)) 98.36% 31.3% / 0.92% 12.1% no-repeat,
+    radial-gradient(ellipse 25% 5.2% at 50% 1.54%, #020203 0 72%, rgba(17, 17, 18, 0.96) 74% 84%, transparent 85%),
+    radial-gradient(circle at 58.5% 3.3%, rgba(66, 89, 196, 0.78) 0 0.34%, #060812 0.72%, transparent 0.86%);
+}
+
+.vf-iphone.vf-landscape {
+  --vf-aspect-ratio: 920 / 450;
+  --vf-screen-left: 2.55%;
+  --vf-screen-top: 5.08%;
+  --vf-screen-right: 3.12%;
+  --vf-screen-bottom: 5.08%;
+  --vf-screen-radius: 5.72% / 11.72%;
+  --vf-device-radius: 7.2% / 14.7%;
+
+  overflow: hidden;
+}
+
+.vf-iphone.vf-landscape::before {
+  inset:
+    var(--vf-body-left)
+    var(--vf-body-top)
+    var(--vf-body-right)
+    var(--vf-body-bottom);
+  border-radius: var(--vf-device-radius);
+}
+
+.vf-iphone.vf-landscape::after {
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.76), var(--vf-metal-edge) 34%, var(--vf-metal-dark)) 21.1% 0.72% / 4.65% 0.92% no-repeat,
+    linear-gradient(90deg, rgba(255, 255, 255, 0.74), var(--vf-metal-edge) 34%, var(--vf-metal-dark)) 28.9% 0.72% / 7.35% 0.92% no-repeat,
+    linear-gradient(90deg, rgba(255, 255, 255, 0.74), var(--vf-metal-edge) 34%, var(--vf-metal-dark)) 38.05% 0.72% / 7.35% 0.92% no-repeat,
+    linear-gradient(90deg, rgba(255, 255, 255, 0.74), var(--vf-metal-edge) 34%, var(--vf-metal-dark)) 31.3% 98.36% / 12.1% 0.92% no-repeat,
+    radial-gradient(ellipse 3.92% 17.6% at 5.98% 45.1%, rgba(0, 0, 0, 0.94) 0 57%, #080909 60% 78%, transparent 80%),
+    radial-gradient(circle at 6.03% 59.8%, rgba(34, 50, 150, 0.9) 0 0.34%, #080b19 0.82%, #020204 1.58%, rgba(0, 0, 0, 0.9) 2.35%, transparent 2.85%);
+}
+
+.vf-ipad {
+  --vf-width: 720px;
+  --vf-aspect-ratio: 2816 / 2155;
+  --vf-screen-left: 3.1%;
+  --vf-screen-top: 4.03%;
+  --vf-screen-right: 3.1%;
+  --vf-screen-bottom: 4.03%;
+  --vf-screen-radius: 4.8% / 6.18%;
+  --vf-device-radius: 5.5% / 7.15%;
+  --vf-ipad-edge: var(--vf-metal-edge);
+  --vf-ipad-mid: var(--vf-metal-mid);
+  --vf-ipad-dark: var(--vf-metal-dark);
+
+  display: block;
+  aspect-ratio: var(--vf-aspect-ratio);
+  padding: 0;
+  border-radius: var(--vf-device-radius);
+  background:
+    linear-gradient(90deg, transparent 0 0.42%, var(--vf-metal-glint) 0.62%, var(--vf-ipad-edge) 0.98%, var(--vf-ipad-mid) 1.75%, var(--vf-ipad-dark) 2.8%, #000 4.05%, #000 95.95%, var(--vf-ipad-dark) 97.2%, var(--vf-ipad-mid) 98.25%, var(--vf-ipad-edge) 99.02%, var(--vf-metal-glint) 99.38%, transparent 99.58%),
+    linear-gradient(180deg, transparent 0 0.44%, var(--vf-metal-glint) 0.66%, var(--vf-ipad-edge) 1.04%, var(--vf-ipad-mid) 1.82%, var(--vf-ipad-dark) 2.96%, #000 4.05%, #000 95.95%, var(--vf-ipad-dark) 97.04%, var(--vf-ipad-mid) 98.18%, var(--vf-ipad-edge) 98.96%, var(--vf-metal-glint) 99.34%, transparent 99.56%),
+    radial-gradient(ellipse at 50% 0.72%, rgba(255, 255, 255, 0.38), transparent 31%),
+    radial-gradient(ellipse at 50% 99.28%, rgba(255, 255, 255, 0.16), transparent 28%),
+    #000;
+  box-shadow:
+    0 32px 74px rgba(15, 23, 42, 0.22),
+    0 0 0 1px rgba(255, 255, 255, 0.28) inset,
+    0 0 0 4px rgba(0, 0, 0, 0.84) inset;
+  filter: none;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.vf-ipad > :not(style):not(script) {
+  position: absolute;
+  z-index: 1;
+  inset:
+    var(--vf-screen-top)
+    var(--vf-screen-right)
+    var(--vf-screen-bottom)
+    var(--vf-screen-left);
+  width: calc(100% - var(--vf-screen-left) - var(--vf-screen-right));
+  height: calc(100% - var(--vf-screen-top) - var(--vf-screen-bottom));
+  border-radius: var(--vf-screen-radius);
+  background: var(--vf-screen-bg);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.05),
+    0 0 0 2px rgba(0, 0, 0, 0.96) inset;
+  overflow: hidden;
+}
+
+.vf-ipad::before {
+  content: "";
+  position: absolute;
+  z-index: 3;
+  inset: 0;
+  width: auto;
+  height: auto;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: inherit;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.48), transparent 1.7% 98.3%, rgba(255, 255, 255, 0.38)),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.5), transparent 2.15% 97.85%, rgba(255, 255, 255, 0.32));
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.68) inset,
+    0 0 0 4px rgba(255, 255, 255, 0.045) inset;
+  transform: none;
+}
+
+.vf-ipad::after {
+  content: "";
+  position: absolute;
+  z-index: 4;
+  inset: 0;
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  background:
+    linear-gradient(90deg, var(--vf-metal-glint), var(--vf-ipad-edge) 42%, var(--vf-ipad-dark)) 6.4% top / 6.05% 0.56% no-repeat,
+    linear-gradient(90deg, var(--vf-metal-glint), var(--vf-ipad-edge) 42%, var(--vf-ipad-dark)) 13.05% top / 4.5% 0.56% no-repeat,
+    linear-gradient(180deg, var(--vf-metal-glint), var(--vf-ipad-edge) 42%, var(--vf-ipad-dark)) left 8.5% / 0.48% 6.25% no-repeat,
+    radial-gradient(circle at 47.1% 2.78%, rgba(76, 99, 211, 0.85) 0 0.19%, #050711 0.42%, transparent 0.55%),
+    radial-gradient(circle at 50% 2.78%, #020303 0 0.5%, transparent 0.58%),
+    radial-gradient(circle at 52.65% 2.78%, #020303 0 0.5%, transparent 0.58%),
+    radial-gradient(ellipse 1.25% 0.52% at 44.65% 2.8%, #020303 0 72%, transparent 74%),
+    radial-gradient(ellipse 20% 1.2% at 50% 0.72%, rgba(255, 255, 255, 0.14), transparent 72%);
+  box-shadow: none;
+  transform: none;
+}
+
+.vf-ipad.vf-portrait {
+  --vf-width: 420px;
+  --vf-aspect-ratio: 2155 / 2816;
+  --vf-screen-left: 4.03%;
+  --vf-screen-top: 3.1%;
+  --vf-screen-right: 4.03%;
+  --vf-screen-bottom: 3.1%;
+  --vf-screen-radius: 6.18% / 4.8%;
+  --vf-device-radius: 7.15% / 5.5%;
+}
+
+.vf-ipad.vf-landscape {
+  --vf-width: 720px;
+  --vf-aspect-ratio: 2816 / 2155;
+}
+
+.vf-ipad.vf-13 {
+  --vf-width: 720px;
+  --vf-aspect-ratio: 2816 / 2155;
+  --vf-screen-left: 3.1%;
+  --vf-screen-top: 4.03%;
+  --vf-screen-right: 3.1%;
+  --vf-screen-bottom: 4.03%;
+  --vf-screen-radius: 4.8% / 6.18%;
+  --vf-device-radius: 5.5% / 7.15%;
+}
+
+.vf-ipad.vf-13.vf-portrait {
+  --vf-width: 420px;
+  --vf-aspect-ratio: 2155 / 2816;
+  --vf-screen-left: 4.03%;
+  --vf-screen-top: 3.1%;
+  --vf-screen-right: 4.03%;
+  --vf-screen-bottom: 3.1%;
+  --vf-screen-radius: 6.18% / 4.8%;
+  --vf-device-radius: 7.15% / 5.5%;
+}
+
+.vf-ipad.vf-11 {
+  --vf-width: 660px;
+  --vf-aspect-ratio: 2497 / 1775;
+  --vf-screen-left: 2.59%;
+  --vf-screen-top: 4.03%;
+  --vf-screen-right: 2.59%;
+  --vf-screen-bottom: 4.03%;
+  --vf-screen-radius: 4.5% / 6.3%;
+  --vf-device-radius: 5.85% / 8.22%;
+}
+
+.vf-ipad.vf-11.vf-portrait {
+  --vf-width: 390px;
+  --vf-aspect-ratio: 1775 / 2497;
+  --vf-screen-left: 4.03%;
+  --vf-screen-top: 2.59%;
+  --vf-screen-right: 4.03%;
+  --vf-screen-bottom: 2.59%;
+  --vf-screen-radius: 6.3% / 4.5%;
+  --vf-device-radius: 8.22% / 5.85%;
+}
+
+.vf-macbook {
+  --vf-width: 760px;
+  --vf-aspect-ratio: 3041 / 2400;
+  --vf-screen-left: 2.75%;
+  --vf-screen-top: 4.7%;
+  --vf-screen-right: 2.75%;
+  --vf-screen-bottom: 17.48%;
+  --vf-screen-radius: 1.65% / 2.45%;
+  --vf-frame-radius: 3.2% / 4.2%;
+  --vf-mac-metal-light: color-mix(in srgb, var(--vf-frame-secondary-color), #fff 58%);
+  --vf-mac-metal-mid: color-mix(in srgb, var(--vf-frame-color), #b8c0ca 48%);
+  --vf-mac-metal-dark: color-mix(in srgb, var(--vf-frame-color), #000 36%);
+
+  display: block;
+  aspect-ratio: var(--vf-aspect-ratio);
+  padding: 0;
+  border-radius: 0;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.26), transparent 4.15% 95.85%, rgba(255, 255, 255, 0.14)) 0 0 / 100% 86.2% no-repeat,
+    linear-gradient(180deg, rgba(255, 255, 255, 0.16), transparent 4.8% 94.2%, rgba(255, 255, 255, 0.08)) 0 0 / 100% 86.2% no-repeat,
+    linear-gradient(180deg, #23272f 0%, #090b0f 6.8%, #020304 91.6%, #11151c 100%) 0 0 / 100% 86.2% no-repeat;
+  box-shadow: none;
+  filter: drop-shadow(0 30px 68px rgba(15, 23, 42, 0.24));
+  isolation: isolate;
+  overflow: visible;
+}
+
+.vf-macbook > :not(style):not(script) {
+  position: absolute;
+  z-index: 1;
+  inset:
+    var(--vf-screen-top)
+    var(--vf-screen-right)
+    var(--vf-screen-bottom)
+    var(--vf-screen-left);
+  width: calc(100% - var(--vf-screen-left) - var(--vf-screen-right));
+  height: calc(100% - var(--vf-screen-top) - var(--vf-screen-bottom));
+  border-radius: var(--vf-screen-radius);
+  background: var(--vf-screen-bg);
+  object-position: top center;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.05),
+    0 0 0 2px rgba(0, 0, 0, 0.72) inset;
+  overflow: hidden;
+}
+
+.vf-macbook::before {
+  content: "";
+  position: absolute;
+  z-index: 4;
+  top: var(--vf-screen-top);
+  left: 50%;
+  width: 10.35%;
+  height: 4.36%;
+  border: 0;
+  border-radius: 0 0 18px 18px;
+  background:
+    radial-gradient(circle at 50% 28%, rgba(31, 45, 84, 0.88) 0 3.4%, #020304 7.2%, transparent 8.4%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.06), transparent 28%),
+    linear-gradient(180deg, #010203, #050609);
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.08),
+    0 1px 0 rgba(255, 255, 255, 0.05);
+  transform: translateX(-50%);
+}
+
+.vf-macbook::after {
+  content: "";
+  position: absolute;
+  z-index: 3;
+  right: 0;
+  bottom: 2.1%;
+  left: 0;
+  height: 11.35%;
+  border-radius: 0 0 30px 30px;
+  background:
+    radial-gradient(ellipse at 50% 1%, rgba(58, 65, 74, 0.52) 0 5.8%, transparent 6.25%),
+    linear-gradient(90deg, transparent 0 0.7%, rgba(255, 255, 255, 0.74) 1.35%, transparent 2.25% 97.75%, rgba(255, 255, 255, 0.62) 98.65%, transparent 99.3%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.58) 0%, var(--vf-mac-metal-light) 4%, var(--vf-mac-metal-mid) 42%, var(--vf-mac-metal-dark) 100%);
+  box-shadow:
+    0 15px 26px rgba(15, 23, 42, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.82),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+}
+
+.vf-iphone.vf-scroll > :not(style):not(script) {
+  scrollbar-gutter: stable;
+}
+
+.vf-browser {
+  --vf-width: 760px;
+  --vf-aspect-ratio: 16 / 10.55;
+  --vf-browser-bar: 88px;
+  --vf-browser-tab-strip-bg: #dee1e6;
+  --vf-browser-toolbar-bg: #f1f3f4;
+  --vf-browser-tab-bg: #fff;
+  --vf-browser-url-bg: #fff;
+  --vf-browser-text: #3c4043;
+  --vf-browser-muted: #5f6368;
+  --vf-browser-border: rgba(60, 64, 67, 0.16);
+  --vf-browser-tab-strip: 43px;
+  --vf-browser-toolbar-height: calc(var(--vf-browser-bar) - var(--vf-browser-tab-strip));
+  --vf-browser-control-height: 22px;
+  --vf-browser-url-height: 30px;
+  --vf-browser-controls-x: 13px;
+  --vf-browser-controls-y: 54.5px;
+  --vf-browser-controls-size: 78px var(--vf-browser-control-height);
+  --vf-browser-url-y: 50.5px;
+  --vf-browser-menu-dot-y: 63.5px;
+  --vf-browser-menu-x: calc(100% - 48px);
+  --vf-browser-menu-y: var(--vf-browser-controls-y);
+  --vf-browser-menu-size: 34px var(--vf-browser-control-height);
+  --vf-frame-radius: 12px;
+  --vf-screen-radius: 0 0 10px 10px;
+
+  display: block;
+  aspect-ratio: var(--vf-aspect-ratio);
+  padding-top: var(--vf-browser-bar);
+  border-radius: var(--vf-frame-radius);
+  background:
+    radial-gradient(circle, #ff5f57 0 5px, transparent 5.6px) 14px 17px / 12px 12px no-repeat,
+    radial-gradient(circle, #febc2e 0 5px, transparent 5.6px) 32px 17px / 12px 12px no-repeat,
+    radial-gradient(circle, #28c840 0 5px, transparent 5.6px) 50px 17px / 12px 12px no-repeat,
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='78' height='22' viewBox='0 0 78 22' fill='none' stroke='%235f6368' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M17 6l-6 5 6 5'/%3E%3Cpath d='M11 11h13'/%3E%3Cpath d='M37 6l6 5-6 5'/%3E%3Cpath d='M30 11h13'/%3E%3Cg transform='translate(53 2) scale(.75)' fill='%235f6368' stroke='none'%3E%3Cpath d='M17.65 6.35A7.95 7.95 0 0 0 12 4a8 8 0 1 0 7.75 10h-2.1A6 6 0 1 1 16.2 7.8L13 11h8V3z'/%3E%3C/g%3E%3C/svg%3E") var(--vf-browser-controls-x) var(--vf-browser-controls-y) / var(--vf-browser-controls-size) no-repeat,
+    radial-gradient(circle, #5f6368 0 2px, transparent 2.6px) right 38px top var(--vf-browser-menu-dot-y) / 4px 4px no-repeat,
+    radial-gradient(circle, #5f6368 0 2px, transparent 2.6px) right 28px top var(--vf-browser-menu-dot-y) / 4px 4px no-repeat,
+    radial-gradient(circle, #5f6368 0 2px, transparent 2.6px) right 18px top var(--vf-browser-menu-dot-y) / 4px 4px no-repeat,
+    linear-gradient(180deg, var(--vf-browser-tab-strip-bg) 0 var(--vf-browser-tab-strip), var(--vf-browser-toolbar-bg) var(--vf-browser-tab-strip) var(--vf-browser-bar), var(--vf-screen-bg) var(--vf-browser-bar)),
+    var(--vf-screen-bg);
+  box-shadow:
+    var(--vf-shadow),
+    inset 0 0 0 1px rgba(60, 64, 67, 0.14);
+  overflow: hidden;
+}
+
+.vf-browser > :not(style):not(script) {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--vf-screen-radius);
+  object-position: top center;
+  overflow: hidden;
+}
+
+.vf-browser::before {
+  content: attr(data-title);
+  position: absolute;
+  z-index: 3;
+  top: 7px;
+  left: 92px;
+  width: min(36%, 270px);
+  height: 36px;
+  padding: 0 38px 0 44px;
+  overflow: hidden;
+  border-radius: 14px 14px 0 0;
+  color: var(--vf-browser-text);
+  font: 600 12px/36px ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  background:
+    radial-gradient(circle at 22px 50%, #4285f4 0 3.2px, transparent 3.8px),
+    radial-gradient(circle at calc(100% - 18px) 50%, var(--vf-browser-muted) 0 2px, transparent 2.6px),
+    linear-gradient(90deg, transparent 0 33px, rgba(60, 64, 67, 0.06) 33px 34px, transparent 34px),
+    var(--vf-browser-tab-bg);
+  box-shadow:
+    0 1px 0 var(--vf-browser-tab-bg);
+}
+
+.vf-browser::after {
+  content: attr(data-url);
+  position: absolute;
+  z-index: 4;
+  top: var(--vf-browser-url-y);
+  right: 78px;
+  left: 132px;
+  height: var(--vf-browser-url-height);
+  padding: 0 70px 0 42px;
+  overflow: hidden;
+  border-radius: 999px;
+  color: var(--vf-browser-text);
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: var(--vf-browser-url-height);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  background:
+    radial-gradient(circle at 18px 50%, #202124 0 2px, transparent 2.6px),
+    linear-gradient(180deg, transparent 9px, var(--vf-browser-muted) 9px 15px, transparent 15px) 17px 50% / 2px 16px no-repeat,
+    var(--vf-browser-url-bg);
+  box-shadow:
+    inset 0 0 0 1px var(--vf-browser-border);
+}
+
+.vf-browser.vf-dark {
+  --vf-browser-tab-strip-bg: #202124;
+  --vf-browser-toolbar-bg: #292a2d;
+  --vf-browser-tab-bg: #303134;
+  --vf-browser-url-bg: #171717;
+  --vf-browser-text: #e8eaed;
+  --vf-browser-muted: #bdc1c6;
+  --vf-browser-border: rgba(232, 234, 237, 0.12);
+  --vf-screen-bg: #111;
+}
+
+.vf-browser.vf-light,
+.vf-browser.vf-silver {
+  --vf-browser-tab-strip-bg: #e8eaed;
+  --vf-browser-toolbar-bg: #f1f3f4;
+  --vf-browser-tab-bg: #fff;
+  --vf-browser-url-bg: #fff;
+  --vf-browser-text: #3c4043;
+  --vf-browser-muted: #5f6368;
+  --vf-browser-border: rgba(60, 64, 67, 0.16);
+}
+
+.vf-browser.vf-compact {
+  --vf-width: 560px;
+  --vf-browser-bar: 96px;
+  --vf-browser-tab-strip: 42px;
+  --vf-browser-control-height: 20px;
+  --vf-browser-url-height: 28px;
+  --vf-browser-controls-y: 59px;
+  --vf-browser-url-y: 55px;
+  --vf-browser-menu-dot-y: 67px;
+  --vf-browser-controls-size: 74px var(--vf-browser-control-height);
+  --vf-browser-menu-x: calc(100% - 54px);
+  --vf-browser-menu-size: 42px var(--vf-browser-control-height);
+}
+
+.vf-browser.vf-compact::before {
+  top: 7px;
+  left: 76px;
+  width: min(38%, 220px);
+  height: 31px;
+  padding: 0 34px 0 36px;
+  font-size: 11px;
+  line-height: 31px;
+}
+
+.vf-browser.vf-compact::after {
+  top: var(--vf-browser-url-y);
+  right: 54px;
+  left: 104px;
+  height: var(--vf-browser-url-height);
+  padding: 0 40px 0 34px;
+  font-size: 11px;
+  line-height: var(--vf-browser-url-height);
+}
+
+.vf-no-shadow:is(.vf-iphone, .vf-ipad, .vf-macbook) {
+  filter: none;
+}
+
+.vf-tilt-left {
+  --vf-rotate-z: calc(var(--vf-tilt) * -1);
+}
+
+.vf-tilt-right {
+  --vf-rotate-z: var(--vf-tilt);
+}
+
+.vf-tilt-forward {
+  --vf-rotate-x: var(--vf-tilt);
+}
+
+.vf-tilt-back {
+  --vf-rotate-x: calc(var(--vf-tilt) * -1);
+}
+
+.vf-glow:is(.vf-iphone, .vf-ipad, .vf-browser, .vf-macbook) {
+  box-shadow:
+    var(--vf-shadow),
+    var(--vf-glow),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.14);
+}
+
+.vf-floating.vf-glow {
+  box-shadow: var(--vf-shadow), var(--vf-glow);
+}
+
+.vf-no-shadow:is(.vf-iphone, .vf-ipad, .vf-macbook, .vf-browser, .vf-floating) {
+  box-shadow: none;
+}
+
+.vf-scroll > :not(style):not(script) {
+  overflow: auto;
+  overscroll-behavior: contain;
+  scrollbar-color: rgba(148, 163, 184, 0.55) transparent;
+  scrollbar-width: thin;
+}
+
+.vf-scroll > :not(style):not(script)::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.vf-scroll > :not(style):not(script)::-webkit-scrollbar-thumb {
+  border: 2px solid transparent;
+  border-radius: 999px;
+  background: rgba(148, 163, 184, 0.55);
+  background-clip: content-box;
+}
+
+.vf-screen-content {
+  color: inherit;
+}
+
+.vf-showcase {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1.5rem, 4vw, 4rem);
+  width: 100%;
+  max-width: 1120px;
+  margin-inline: auto;
+  perspective: 1200px;
+}
+
+.vf-showcase > :is(.vf-iphone, .vf-ipad, .vf-macbook, .vf-browser, .vf-floating) {
+  margin-inline: 0;
+}
+
+.vf-showcase .vf-iphone {
+  --vf-width: 230px;
+}
+
+.vf-showcase .vf-ipad {
+  --vf-width: 480px;
+}
+
+.vf-showcase .vf-macbook,
+.vf-showcase .vf-browser,
+.vf-showcase .vf-floating {
+  --vf-width: 660px;
+}
+
+.vf-showcase.vf-overlap {
+  gap: 0;
+}
+
+.vf-showcase.vf-overlap > * + * {
+  margin-left: clamp(-140px, -10vw, -48px);
+}
+
+.vf-showcase.vf-overlap > :nth-child(1) {
+  z-index: 1;
+  --vf-offset-y: 12px;
+}
+
+.vf-showcase.vf-overlap > :nth-child(2) {
+  z-index: 2;
+  --vf-offset-y: -10px;
+}
+
+.vf-showcase.vf-overlap > :nth-child(3) {
+  z-index: 3;
+  --vf-offset-y: 18px;
+}
+
+.vf-showcase.vf-stack {
+  flex-direction: column;
+}
+
+.vf-showcase.vf-center {
+  text-align: center;
+}
+
+.vf-showcase.vf-responsive {
+  flex-wrap: wrap;
+}
+
+.vf-before-after {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: center;
+  gap: clamp(1.5rem, 4vw, 4rem);
+  width: 100%;
+}
+
+.vf-before,
+.vf-after {
+  display: grid;
+  gap: 1rem;
+  justify-items: center;
+  min-width: 0;
+}
+
+.vf-before > p,
+.vf-after > p {
+  margin: 0;
+  font: 700 0.78rem/1.2 ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.vf-before > img {
+  display: block;
+  width: min(100%, 340px);
+  border-radius: 24px;
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.16);
+}
+
+.vf-float {
+  animation: vf-float var(--vf-duration) ease-in-out infinite;
+}
+
+@keyframes vf-float {
+  0%,
+  100% {
+    transform:
+      translate(var(--vf-offset-x, 0px), var(--vf-offset-y, 0px))
+      translateY(0)
+      rotateX(var(--vf-rotate-x, 0deg))
+      rotateY(var(--vf-rotate-y, 0deg))
+      rotateZ(var(--vf-rotate-z, 0deg))
+      scale(var(--vf-scale, 1));
+  }
+
+  50% {
+    transform:
+      translate(var(--vf-offset-x, 0px), var(--vf-offset-y, 0px))
+      translateY(calc(var(--vf-float-distance) * -1))
+      rotateX(var(--vf-rotate-x, 0deg))
+      rotateY(var(--vf-rotate-y, 0deg))
+      rotateZ(var(--vf-rotate-z, 0deg))
+      scale(var(--vf-scale, 1));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vf-float {
+    animation: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .vf-iphone {
+    max-width: min(100%, 88vw);
+  }
+
+  .vf-ipad,
+  .vf-macbook,
+  .vf-browser,
+  .vf-floating {
+    max-width: min(100%, 94vw);
+  }
+
+  .vf-macbook::after {
+    right: 0;
+    left: 0;
+  }
+
+  .vf-browser {
+    --vf-browser-bar: 76px;
+    --vf-browser-control-height: 19px;
+    --vf-browser-url-height: 22px;
+    --vf-browser-controls-x: 18px;
+    --vf-browser-controls-y: 50px;
+    --vf-browser-controls-size: 76px var(--vf-browser-control-height);
+    --vf-browser-url-y: 48.5px;
+    --vf-browser-menu-dot-y: 57.5px;
+    --vf-browser-menu-x: calc(100% - 43px);
+    --vf-browser-menu-size: 36px var(--vf-browser-control-height);
+  }
+
+  .vf-browser::before {
+    top: 5px;
+    left: 74px;
+    width: min(42%, 210px);
+    height: 30px;
+    padding: 0 30px 0 36px;
+    font-size: 10px;
+    line-height: 30px;
+  }
+
+  .vf-browser::after {
+    right: 46px;
+    left: 100px;
+    padding: 0 42px 0 32px;
+    font-size: 10px;
+  }
+
+  .vf-showcase,
+  .vf-showcase.vf-overlap {
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+
+  .vf-showcase.vf-overlap > * + * {
+    margin-left: 0;
+  }
+
+  .vf-showcase.vf-overlap > * {
+    --vf-offset-y: 0px;
+  }
+
+  .vf-before-after {
+    grid-template-columns: 1fr;
+  }
+}
