@@ -8,6 +8,6 @@
 
 ## 公開メモ
 
+- 公開URL: https://viewport-frames.lolipop-now.app
 - 種別: 静的HTML / CSSライブラリ・ショーケース
 - トップページで各フレームと効果を比較できます
-
